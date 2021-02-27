@@ -1,0 +1,92 @@
+.select-box {
+    padding: 10px 10px;
+    border-bottom: 1px solid black;
+}
+
+.selected-box {
+    background-color: #ebebeb;
+}
+
+#user-pane {
+    height: 500px;
+    border: 1px solid black;
+    padding: 0 0;
+}
+
+#chat-pane {
+    height: 500px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    padding: 0 0;
+}
+
+#selcted-user-details {
+    height: 70px;
+    border-bottom: 1px solid black;
+    background-color: #ededed;
+    padding: 10px 10px;
+}
+
+#selcted-user-details #chat-username {
+    font-size: 30px;
+}
+
+#chat-user-image {
+    font-size: 30px;
+    background-color: white;
+}
+
+#message-pane {
+    height: 379px;
+    background-color: #e5ddd5;
+}
+
+.message-rec {
+    padding: 10px 10px;
+}
+
+.message-sent {
+    padding: 10px 10px;
+}
+
+.message-rec .message{
+    background-color: white;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.message-sent .message {
+    background-color: #dcf8c6;
+    border-bottom-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.message {
+    padding: 2px 5px;
+}
+
+.left-triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 0;
+    border-color: transparent white transparent transparent;
+
+}
+
+.right-triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 0;
+    border-color: #dcf8c6 transparent transparent transparent;
+}
+
+#type-pane {
+    height: 49px;
+    background-color: #f0f0f0;
+    
+}
