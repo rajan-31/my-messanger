@@ -11,15 +11,46 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/index.html");
 });
 
+// stored chats
+let MessangerUsers = [
+  {
+    userid: 123,
+    username: "Rajan",
+    chats: [
+      {
+          userid: 789,
+          username: "Rohan",
+          messages: [{who: "him",msg:"hii"}, {who: "me",msg:"How are you?"}]
+      }
+    ]
+  },
+  {
+    userid: 789,
+    username: "Rohan",
+    chats: [
+      {
+          userid: 123,
+          username: "Rajan",
+          messages: [{who: "him",msg:"hey"}, {who: "me",msg:"Nice to see you?"}]
+      }
+    ]
+  }
+]
+
 io.on("connection", (socket) => {
-    let users = [];
-    for (let [socket] of io.of("/").sockets) {
-      users.push({
-        userid: socket.userid,
-        username: socket.username,
-      });
+    // send chats
+    for(let i=0; i<MessangerUsers.length; i++) {
+      const user = MessangerUsers[i];
+      if(user.userid == socket.userid) {
+        const myChats = user.chats;
+        socket.emit("my chats", myChats);
+
+        break;
+      }
     }
-    socket.emit("users", users);
+
+    // join own room
+    socket.join(socket.userid);
 
     // broadcast newly connected user
     socket.broadcast.emit("user connected", {
@@ -29,19 +60,62 @@ io.on("connection", (socket) => {
     
     // emit message to receiver
     socket.on("private message", ({ content, to }) => {
-        socket.to(to).emit("private message", {
-          content,
-          from: {
-            userid: socket.userid,
-            username: socket.username
+      // persist data
+      for(let i=0; i<MessangerUsers.length; i++) {
+        const user = MessangerUsers[i];
+        if(user.userid == socket.userid) {
+          const allChats = user.chats;
+          for(let j=0; j<allChats.length; i++) {
+            if(allChats[j].userid==to) {
+              MessangerUsers[i].chats[j].messages.push({who: "me", msg: content});
+
+              break
+            }
           }
-        });
+
+          break;
+        } 
+      }
+
+      for(let i=0; i<MessangerUsers.length; i++) {
+        const user = MessangerUsers[i];
+        if(user.userid == to) {
+          const allChats = user.chats;
+          for(let j=0; j<allChats.length; i++) {
+            if(allChats[j].userid==socket.userid) {
+              MessangerUsers[i].chats[j].messages.push({who: "him", msg: content});
+
+              break
+            }
+          }
+
+          break;
+        } 
+      }
+
+      // send to receiver
+      socket.to(to).emit("private message", {
+        content,
+        from: {
+          userid: socket.userid,
+          username: socket.username
+        }
+      });
     });
 });
 
 io.use((socket, next) => {
     const userid = socket.handshake.auth.userid;
-    const username = socket.handshake.auth.username;
+    let username;
+    for(let i=0; i<MessangerUsers.length; i++) {
+      const user = MessangerUsers[i];
+      if(user.userid == userid) {
+        username = user.username;
+
+        break;
+      }
+    }
+
     console.log("userid:", userid, "username:", username);
 
     if (!userid || !username) {

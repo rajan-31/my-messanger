@@ -15,6 +15,7 @@
 
 #chat-pane {
     height: 500px;
+    background-color: #e5ddd5;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     border-right: 1px solid black;
@@ -25,21 +26,30 @@
     height: 70px;
     border-bottom: 1px solid black;
     background-color: #ededed;
-    padding: 10px 10px;
+    padding: 15px 15px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
 }
 
 #selcted-user-details #chat-username {
-    font-size: 30px;
+    font-size: 25px;
+    padding: 0 5px;
 }
 
 #chat-user-image {
-    font-size: 30px;
+    font-size: 15px;
     background-color: white;
+    display: inline-block;
+    border-radius: 60px;
+    box-shadow: 0px 0px 2px #888;
+    padding: 0.5em 0.6em;
 }
 
 #message-pane {
     height: 379px;
     background-color: #e5ddd5;
+    overflow-y: auto;
 }
 
 .message-rec {
@@ -65,7 +75,10 @@
 }
 
 .message {
-    padding: 2px 5px;
+    padding: 2px 7px;
+    max-width: 500px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .left-triangle {
@@ -88,5 +101,11 @@
 #type-pane {
     height: 49px;
     background-color: #f0f0f0;
-    
+    max-height: 300px;
 }
+
+#send-message {
+    resize: none;
+}
+
+/* misc */

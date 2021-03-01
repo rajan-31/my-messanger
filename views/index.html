@@ -12,42 +12,26 @@
 </head>
 <body>
     <div class="container py-5">
-        <input id="userid" type="text" placeholder="UserId" value="123">
-        <input id="username" type="text" placeholder="Username" value="rajan">
+        <!-- <input id="userid" type="text" placeholder="UserId" value="123">
+        <input id="username" type="text" placeholder="Username" value="rajan"> -->
+        <select id="userid"><option value="123">123</option><option value="789">789</option> </select>
         <button id="submit-userid" class="btn btn-success rounded-pill">Submit</button>
     
         <h4 class="pt-3 text-center">My Messanger</h4>
         <div class="row" id="main-content">
             <div id="user-pane" class="col-4">
-                <div data-userid=123 class="select-box d-flex">
-                    <div class="fas fa-circle text-warning my-auto"></div>
-                    <div>&nbsp;Rajan</div>
-                    <div class="fas fa-envelope notify text-success ml-auto"></div>
-                </div>
-                <!-- add placeholder for new msg simbol, handle msg, append it to array on both server n client -->
-                <div data-userid=789 class="select-box d-flex">
-                    <div class="fas fa-circle text-warning my-auto"></div>
-                    <div>&nbsp;Rohan</div>
-                    <div class="notify text-success ml-auto my-auto"></div>
-                </div>
+                
             </div>
             <div id="chat-pane" class="col-8">
-                <div id="selcted-user-details">
-                    <span id="chat-user-image" class="fas fa-user rounded-circle"></span>
-                    <span id="chat-username">Rohan</span>
+                <div id="selcted-user-details" hidden="hidden">
+                    <span id="chat-user-image" class="fas fa-user"></span>
+                    <span id="chat-username"></span>
                 </div>
-                <div id="message-pane">
-                    <div class="message-rec d-flex flex-row">
-                        <span class="left-triangle"></span>
-                        <span class="message">Hello, how are you?</span>
-                    </div>
-                    <div class="message-sent d-flex flex-row-reverse">
-                        <span class="right-triangle"></span>
-                        <span class="message">I am fine, you?</span>
-                    </div>
+                <div id="message-pane" hidden="hidden">
+                    
                 </div>
-                <div id="type-pane" class="d-flex justify-content-center align-items-center">
-                    <input id="send-message" type="text" class="form-control ml-2" placeholder="Enter your message...">
+                <div id="type-pane" class="d-none justify-content-center align-items-center">
+                    <textarea id="send-message" class="form-control ml-2" placeholder="Enter your message..." cols="30" rows="1">heyyy</textarea>
                     <button id="send-btn" class="btn btn-success rounded-circle mx-2"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
