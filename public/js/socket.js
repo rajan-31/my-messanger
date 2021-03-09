@@ -15,7 +15,8 @@ $("#submit-userid").on("click", () => {
         socket.on("my chats", (myChats) => {
 
             // if statement because on server restart chats user will be added again
-            if($("#user-pane").length == 0) {
+
+            if($("#user-pane").children().length == 0) {
                 chats = myChats;
                 for(let i=0; i<myChats.length; i++) {
                     const user = myChats[i];

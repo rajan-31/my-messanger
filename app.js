@@ -3,7 +3,7 @@ const app = express();
 const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer);
 
-const port = 8080;
+const port = 8081;
 
 app.use(express.static("public"));
 
@@ -20,7 +20,8 @@ let MessangerUsers = [
       {
           userid: 789,
           username: "Rohan",
-          messages: [{who: "him",msg:"hii"}, {who: "me",msg:"How are you?"}]
+          messages: []
+          // messages: [{who: "him",msg:"hii"}, {who: "me",msg:"How are you?"}]
       }
     ]
   },
@@ -31,7 +32,7 @@ let MessangerUsers = [
       {
           userid: 123,
           username: "Rajan",
-          messages: [{who: "him",msg:"hey"}, {who: "me",msg:"Nice to see you?"}]
+          messages: []
       }
     ]
   }
@@ -85,8 +86,11 @@ io.on("connection", (socket) => {
             if(allChats[j].userid==socket.userid) {
               MessangerUsers[i].chats[j].messages.push({who: "him", msg: content});
 
-              break
+              break;
+              
+
             }
+            
           }
 
           break;
