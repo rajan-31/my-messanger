@@ -6,6 +6,4 @@ First development version
 prod
 
 - add message option on comm page
-- 
-
-- add is online status
+- add "is online" status
